@@ -6,7 +6,8 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace Shadowrun{
-    public class Skill : INotifyPropertyChanged {
+    [XmlRoot(ElementName = "", Namespace = "")]
+    public class Skill : INotifyPropertyChanged,ICloneable {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int _Rating;
@@ -35,14 +36,17 @@ namespace Shadowrun{
 
         public Skill() {
             Name = "";
-            Description = "";
-            Group = "";
-            CanDefault = false;
+            Type = SkillType.Active;
             LinkedTo = Attribute.Agility;
+            Group = "";
+            Description = "";
+            CanDefault = false;
             Specializations = new ObservableCollection<Specialization>();
+            Rating = 0;
+            
         }
 
-        public Skill(Attribute attribute, SkillType skilltype, bool candefault, string name = "", string group = "", string description = "") {
+        public Skill(Attribute attribute, SkillType skilltype, bool candefault, string name = "", string group = "", string description = "",int rating=0) {
             Name = name;
             Type = skilltype;
             LinkedTo = attribute;
@@ -50,6 +54,7 @@ namespace Shadowrun{
             Description = description;
             CanDefault = candefault;
             Specializations = new ObservableCollection<Specialization>();
+            Rating = rating;
         }
 
         public string ToXML() {
@@ -57,13 +62,11 @@ namespace Shadowrun{
             XmlTextWriter tw = null;
             try {
                 XmlSerializer serializer = new XmlSerializer(typeof(Skill));
-                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                ns.Add("", "");
                 tw = new XmlTextWriter(sw);
                 tw.Formatting = Formatting.Indented;
                 tw.IndentChar = '\t';
                 tw.Indentation = 1;
-                serializer.Serialize(tw, this, ns);
+                serializer.Serialize(tw, this);
             } catch (Exception ex) {
                 Console.WriteLine("ERROR: " + ex.GetType().Name);
                 Console.WriteLine(ex.Message);
@@ -80,7 +83,7 @@ namespace Shadowrun{
             StringReader strReader = null;
             XmlSerializer serializer = null;
             XmlTextReader xmlReader = null;
-            Skill skill = null;
+            Skill skill = new Skill();
             try {
                 strReader = new StringReader(xml);
                 serializer = new XmlSerializer(typeof(Skill));
@@ -99,6 +102,19 @@ namespace Shadowrun{
             }
             return skill;
         }
+
+        public object Clone() {
+            Skill sk = new Skill();
+            sk.Name = Name;
+            sk.Type = Type;
+            sk.LinkedTo = LinkedTo;
+            sk.Group = Group;
+            sk.Description=Description;
+            sk.CanDefault = CanDefault;
+            sk.Specializations = Specializations;
+            sk.Rating = Rating;
+            return sk;
+        }
     }
 	
 	public class Specialization: INotifyPropertyChanged{
@@ -110,19 +126,19 @@ namespace Shadowrun{
         public int Rating {get { return _Rating; }set { _Rating = value;PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Rating")); }}
 
         [XmlText]
-		public string Name{
-			get{return _Name;}
-			set{_Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); }
+        public string Name {
+            get { return _Name; }
+            set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); }
+        }
+
+        public Specialization() {
+            Name = "";
+            Rating = 0;
         }
 		
-		
-
-		public Specialization(){
-			Name = "";
-		}
-		
-		public Specialization(string name=""){
-			Name=name;
+		public Specialization(string name="",int rating=0){
+            _Name = name;
+            _Rating = rating;
 		}
 			
 	}

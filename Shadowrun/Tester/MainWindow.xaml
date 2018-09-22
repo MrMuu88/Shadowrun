@@ -7,8 +7,8 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:Shadowrun="clr-namespace:Shadowrun;assembly=Shadowrun"
         mc:Ignorable="d"
-        Title="Skill Tester" Height="450" Width="562.689"
-        ResizeMode="NoResize">
+        Title="Skill Tester" MinHeight="400" Height="400" MinWidth="600" Width="750"
+        >
     <Window.Resources>
         <ObjectDataProvider x:Key="DataFromAttributesEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -20,21 +20,54 @@
                 <x:Type TypeName="Shadowrun:SkillType"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <local:StringToSpecsConverter x:Key="StringToSpecs"/>
     </Window.Resources>
-    <Grid DataContext="{Binding ElementName=window}">
-        <Label Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Group" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Label Content="LinkedTo" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding TestSkill.Name}" HorizontalAlignment="Left" Height="23" Margin="72,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Text="{Binding TestSkill.Group}"  HorizontalAlignment="Left" Height="23" Margin="72,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox DataContext="{Binding Source={StaticResource DataFromAttributesEnum}}" SelectedItem="{Binding ElementName=window, Path=TestSkill.LinkedTo}" HorizontalAlignment="Left" Margin="72,76,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Mode=OneWay}"/>
-        <Label Content="Type" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top"/>
-        <ComboBox DataContext="{Binding Source={StaticResource DataFromSkillTypeEnum}}" SelectedItem="{Binding ElementName=window, Path=TestSkill.Type}" HorizontalAlignment="Left" Margin="72,103,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Mode=OneWay}"/>
-        <TextBox Text="{Binding ElementName=window, Path=TestSkill.Description}"  HorizontalAlignment="Left" Height="123" Margin="10,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
-        <CheckBox IsChecked="{Binding TestSkill.CanDefault}" Content="Can Default" HorizontalAlignment="Left" Margin="106,130,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.476,-0.219" FlowDirection="RightToLeft" Width="86"/>
-        <TextBox HorizontalAlignment="Left" Height="372" Margin="197,14,0,0" TextWrapping="Wrap" Text="{Binding xml}" VerticalAlignment="Top" Width="350"/>
-        <Button Content="DeSerialize" Click="btnDeSerialize_Clicked" HorizontalAlignment="Left" Margin="197,391,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Serialize" Click="btnSerialize_Click" HorizontalAlignment="Left" Margin="117,391,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.493,0.45"/>
-        <TextBox Text="{Binding TestSkill.Description, ElementName=window}"  HorizontalAlignment="Left" Height="108" Margin="10,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
+    <Grid DataContext="{Binding ElementName=window}" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Name" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="Group" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="LinkedTo" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+        <Label Content="Type" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+        <Label Content="CanDefault" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
+        <TextBox Text="{Binding WorkingSkill.Name}" Margin="5,6" HorizontalAlignment="Stretch" Height="24" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Text="{Binding WorkingSkill.Group}" Margin="5,6" HorizontalAlignment="Stretch" Height="24" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+        <ComboBox DataContext="{Binding Source={StaticResource DataFromAttributesEnum}}" SelectedItem="{Binding ElementName=window, Path=WorkingSkill.LinkedTo}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" ItemsSource="{Binding Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+        <ComboBox DataContext="{Binding Source={StaticResource DataFromSkillTypeEnum}}" SelectedItem="{Binding ElementName=window, Path=WorkingSkill.Type}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" ItemsSource="{Binding Mode=OneWay}" Grid.Row="3" Grid.Column="1"/>
+        <CheckBox IsChecked="{Binding WorkingSkill.CanDefault}" HorizontalAlignment="Left" Margin="5"  VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
+        <TextBox AcceptsReturn="True" Text="{Binding ElementName=window, Path=WorkingSkill.Description}" Margin="5" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <TextBox AcceptsReturn="True" Text="{Binding Converter={StaticResource StringToSpecs}, Path=WorkingSkill.Specializations}" Margin="5" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnAdd" Click="btnAdd_Click" Content="Add" HorizontalAlignment="Right" Margin="5"  VerticalAlignment="Center" Width="75" Grid.Row="7" Grid.Column="1"/>
+        <ListBox x:Name="lstSkills"  ItemsSource="{Binding Skills}" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2" Grid.RowSpan="7" Panel.ZIndex="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Stretch">
+            <Button x:Name="btnLoad" Click="btnLoad_Click" Content="Load" Margin="5" VerticalAlignment="Center" Width="60" Grid.Row="7" Grid.Column="2"/>
+            <Button x:Name="btnRemove" Click="btnRemove_Click" Content="Remove" Margin="5" VerticalAlignment="Center" Width="60" Grid.Row="7" Grid.Column="2"/>
+        <Button x:Name="btnSerialize" Click="btnSerialize_Click" Content="Serialize" Margin="5" VerticalAlignment="Center" Grid.Row="7" Grid.Column="2"/>
+        </StackPanel>
+        
+        <Button x:Name="btnDeSerialize" Click="btnDeSerialize_Clicked" Content="DeSerialize" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" Width="90" Grid.Row="7" Grid.Column="3"/>
+        <TextBox AcceptsReturn="True" HorizontalAlignment="Stretch" Margin="5" TextWrapping="Wrap" Text="{Binding xml}" VerticalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="7" Grid.Column="3"/>
     </Grid>
 </Window>

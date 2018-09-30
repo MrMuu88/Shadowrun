@@ -10,8 +10,7 @@ namespace Shadowrun{
     public class Skill : INotifyPropertyChanged,ICloneable {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private int _Rating;
-        private string _Name;
+		private string _Name;
         private string _Group;
         private string _Description;
         private Attribute _LinkedTo;
@@ -20,7 +19,6 @@ namespace Shadowrun{
         private bool _CanDefault;
 
         [XmlAttribute]
-        public int Rating { get { return _Rating; } set { _Rating = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Rating")); } }
         public string Name { get { return _Name; } set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); } }
         public string Group { get { return _Group; } set { _Group = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Group")); } }
         public string Description { get { return _Description; } set { _Description = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Description")); } }
@@ -38,15 +36,14 @@ namespace Shadowrun{
             Name = "";
             Type = SkillType.Active;
             LinkedTo = Attribute.Agility;
-            Group = "";
+            Group = "None";
             Description = "";
-            CanDefault = false;
+            CanDefault = true;
             Specializations = new ObservableCollection<Specialization>();
-            Rating = 0;
             
         }
 
-        public Skill(Attribute attribute, SkillType skilltype, bool candefault, string name = "", string group = "", string description = "",int rating=0) {
+        public Skill(Attribute attribute, SkillType skilltype, bool candefault, string name = "", string group = "", string description = "") {
             Name = name;
             Type = skilltype;
             LinkedTo = attribute;
@@ -54,7 +51,6 @@ namespace Shadowrun{
             Description = description;
             CanDefault = candefault;
             Specializations = new ObservableCollection<Specialization>();
-            Rating = rating;
         }
 
         public string ToXML() {
@@ -112,7 +108,6 @@ namespace Shadowrun{
             sk.Description=Description;
             sk.CanDefault = CanDefault;
             sk.Specializations = Specializations;
-            sk.Rating = Rating;
             return sk;
         }
     }
@@ -120,10 +115,7 @@ namespace Shadowrun{
 	public class Specialization: INotifyPropertyChanged{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private string _Name;
-        private int _Rating;
-
-        [XmlAttribute]
-        public int Rating {get { return _Rating; }set { _Rating = value;PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Rating")); }}
+        private Skill _Skill;
 
         [XmlText]
         public string Name {
@@ -131,14 +123,20 @@ namespace Shadowrun{
             set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); }
         }
 
+        [XmlAttribute]
+        public Skill Skill {
+            get { return _Skill; }
+            set { _Skill = value;PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Skill")); }
+        }
+
         public Specialization() {
             Name = "";
-            Rating = 0;
+            Skill = null;
         }
 		
-		public Specialization(string name="",int rating=0){
-            _Name = name;
-            _Rating = rating;
+		public Specialization(string name="",Skill skill=null){
+            Name = name;
+            Skill = skill;
 		}
 			
 	}

@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadowrun", "Shadowrun\Shadowrun.csproj", "{533F4D21-A6D3-40B4-A3E8-A00C4529D5F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shadowrun", "Shadowrun\Shadowrun.csproj", "{533F4D21-A6D3-40B4-A3E8-A00C4529D5F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{9E169C6A-7AF6-412A-8251-F0299BAC9A8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{93E4114A-5471-4EC8-ADBD-4E287432F17C}"
+	ProjectSection(SolutionItems) = preProject
+		..\MyResources\Data\Skils.xml = ..\MyResources\Data\Skils.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -40,9 +40,9 @@ namespace Tester {
             WorkingSkill.Group = "None";
             WorkingSkill.LinkedTo = Shadowrun.Attribute.Body;
             WorkingSkill.Description = "how to use a bow";
-            WorkingSkill.Specializations.Add(new Specialization("Bow"));
-            WorkingSkill.Specializations.Add(new Specialization("CrossBow"));
-            WorkingSkill.Specializations.Add(new Specialization("Special Ammunition"));
+            WorkingSkill.Specializations.Add(new Specialization("Bow",WorkingSkill));
+            WorkingSkill.Specializations.Add(new Specialization("CrossBow",WorkingSkill));
+            WorkingSkill.Specializations.Add(new Specialization("Special Ammunition",WorkingSkill));
 
 
         }
@@ -61,6 +61,7 @@ namespace Tester {
         private void btnAdd_Click(object sender, RoutedEventArgs e) {
             Skill sk = (Skill)WorkingSkill.Clone();
             sk.Name = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(sk.Name.ToLower());
+            sk.Description = sk.Description.Replace("\r\n", " ");
             Skills.Add(sk);
             WorkingSkill = new Skill();
         }

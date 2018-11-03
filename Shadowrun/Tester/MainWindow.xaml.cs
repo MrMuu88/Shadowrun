@@ -38,7 +38,7 @@ namespace Tester {
             WorkingSkill = new Skill();
             WorkingSkill.Name = "Archery";
             WorkingSkill.Group = "None";
-            WorkingSkill.LinkedTo = Shadowrun.Attribute.Body;
+            WorkingSkill.LinkedTo = (int)Shadowrun.Attribute.Body;
             WorkingSkill.Description = "how to use a bow";
             WorkingSkill.Specializations.Add(new Specialization("Bow",WorkingSkill));
             WorkingSkill.Specializations.Add(new Specialization("CrossBow",WorkingSkill));

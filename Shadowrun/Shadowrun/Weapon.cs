@@ -22,7 +22,8 @@ namespace Shadowrun {
 	}
 
 	public class Explosive : Weapon {
-		//TODO this has toS be read throught to understand
+		//TODO this has to be read throught to understand
+		//adding some commits t o test git repo
 		public string Blast { get; set; }
 	}
 

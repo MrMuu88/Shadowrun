@@ -126,9 +126,13 @@ namespace Tester {
             }
             return skills;
         }
-    }//clss
 
-    class StringToSpecsConverter:IValueConverter{  
+		private void OnbtnSave2DB_Click(object sender, RoutedEventArgs e) {
+		
+		}
+	}//clss
+
+	class StringToSpecsConverter:IValueConverter{  
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture){
             List<string> ret = new List<string>();
 

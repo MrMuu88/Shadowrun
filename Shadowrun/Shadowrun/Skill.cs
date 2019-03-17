@@ -10,6 +10,8 @@ namespace Shadowrun{
     public class Skill : INotifyPropertyChanged,ICloneable {
         public event PropertyChangedEventHandler PropertyChanged;
 
+		#region Fields and Properties ###################################################################
+
 		private string _Name;
         private string _Group;
         private string _Description;
@@ -19,42 +21,49 @@ namespace Shadowrun{
         private bool _CanDefault;
 
         [XmlElement]
-        public string Name { get { return _Name; } set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); } }
+        public string Name {
+			get { return _Name; }
+			set { _Name = value; 
+				  RaisePropertyChanged(nameof(Name)); } }
 		[XmlElement]
-		public string Group { get { return _Group; } set { _Group = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Group")); } }
+		public string Group {
+		get { return _Group; } 
+		set { _Group = value;
+			  RaisePropertyChanged(nameof(Group)); } }
 		[XmlElement]
-		public string Description { get { return _Description; } set { _Description = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Description")); } }
+		public string Description { 
+		get { return _Description; } 
+		set { _Description = value;
+			  RaisePropertyChanged(nameof(Description)); } }
 
         [XmlAttribute]
-        public Attribute LinkedTo { get { return _LinkedTo; } set { _LinkedTo = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Attribute")); } }
+        public Attribute LinkedTo { 
+		get { return _LinkedTo; } 
+		set { _LinkedTo = value;
+			  RaisePropertyChanged(nameof(Attribute)); } }
         [XmlAttribute]
-        public SkillType Type { get { return _Type; } set { _Type = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Type")); } }
+        public SkillType Type { 
+		get { return _Type; } 
+		set { _Type = value;
+			  RaisePropertyChanged(nameof(Type)); } }
         [XmlAttribute]
-        public bool CanDefault { get { return _CanDefault; } set { _CanDefault = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CanDefault")); } }
+        public bool CanDefault { 
+		get { return _CanDefault; } 
+		set { _CanDefault = value;
+			  RaisePropertyChanged(nameof(CanDefault)); } }
 
         [XmlArrayItem]
-        public ObservableCollection<Specialization> Specializations { get { return _Specializations; } set { _Specializations = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Specializations")); } }
+        public ObservableCollection<Specialization> Specializations { 
+		get { return _Specializations; } 
+		set { _Specializations = value;
+			  RaisePropertyChanged(nameof(Specializations)); } }
 
-        public Skill() {
-            Name = "";
-            Type = SkillType.Active;
-            LinkedTo = Attribute.Agility;
-            Group = "None";
-            Description = "";
-            CanDefault = true;
-            Specializations = new ObservableCollection<Specialization>();
-            
-        }
+		#endregion
 
-        public Skill(Attribute attribute, SkillType skilltype, bool candefault, string name = "", string group = "", string description = "") {
-            Name = name;
-            Type = skilltype;
-            LinkedTo = attribute;
-            Group = group;
-            Description = description;
-            CanDefault = candefault;
-            Specializations = new ObservableCollection<Specialization>();
-        }
+		#region Methods #################################################################################
+		private void RaisePropertyChanged(string PropertyName) {
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+		}
 
         public string ToXML() {
             StringWriter sw = new StringWriter();
@@ -113,37 +122,78 @@ namespace Shadowrun{
             sk.Specializations = Specializations;
             return sk;
         }
-    }
-	
-	public class Specialization: INotifyPropertyChanged{
-		public event PropertyChangedEventHandler PropertyChanged;
-		private string _Name;
-        private Skill _Skill;
 
-        [XmlElement]
-        public string Name {
-            get { return _Name; }
-            set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); }
-        }
+		#endregion
 
-        [XmlElement]
-        public Skill Skill {
-            get { return _Skill; }
-            set { _Skill = value;PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Skill")); }
-        }
-
-        public Specialization() {
+		#region Ctors ###################################################################################
+       
+		public Skill() {
             Name = "";
-            Skill = null;
+            Type = SkillType.Active;
+            LinkedTo = Attribute.Agility;
+            Group = "None";
+            Description = "";
+            CanDefault = true;
+            Specializations = new ObservableCollection<Specialization>();
+            
         }
 		
-		public Specialization(string name="",Skill skill=null){
+        public Skill(Attribute attribute, SkillType skilltype, bool candefault, string name = "", string group = "", string description = "") {
             Name = name;
-            Skill = skill;
+            Type = skilltype;
+            LinkedTo = attribute;
+            Group = group;
+            Description = description;
+            CanDefault = candefault;
+            Specializations = new ObservableCollection<Specialization>();
+        }
+
+		#endregion
+		
 		}
-			
+
+	public class Specialization : INotifyPropertyChanged {
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		#region Fields and Properties ###################################################################
+
+		private string _Name;
+		private Skill _Skill;
+
+		[XmlElement]
+		public string Name {
+			get { return _Name; }
+			set { _Name = value; RaisePropertyChanged(nameof(Name)); }
+		}
+
+		[XmlElement]
+		public Skill Skill {
+			get { return _Skill; }
+			set { _Skill = value; RaisePropertyChanged(nameof(Skill)); }
+		}
+		#endregion
+
+		#region Methods #################################################################################
+
+		private void RaisePropertyChanged(string PropertyName) {
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+		}
+
+		#endregion
+
+		#region Ctors####################################################################################
+
+		public Specialization() {
+			Name = "";
+			Skill = null;
+		}
+
+		public Specialization(string name = "", Skill skill = null) {
+			Name = name;
+			Skill = skill;
+		}
+
+		#endregion
 	}
-	
-	public enum Attribute{Body,Agility,Reaction,Strength,Willpower,Logic,Intuition,Charisma,Essence,Magic,Resonance,Edge}
-	public enum SkillType{Active,Knowledge}
+
 }

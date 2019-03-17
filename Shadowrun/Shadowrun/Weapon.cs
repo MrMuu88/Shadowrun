@@ -23,13 +23,9 @@ namespace Shadowrun {
 
 	public class Explosive : Weapon {
 		//TODO this has to be read throught to understand
-		//adding some commits t o test git repo
 		public string Blast { get; set; }
 	}
 
-	public enum DamageType { Physical, Stun }
-	public enum FiringMode { SS, SA, BF, LB, FA }
 
-	public enum ReloadingMethod { Clip, Belt, BreakAction, Cylinder, Drum, Magazie, Muzzle }
-	
+
 }

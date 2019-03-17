@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{93E4114A-5
 		..\MyResources\Data\Skils.xml = ..\MyResources\Data\Skils.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{7FEB2478-7700-40DD-9E21-FF3C4D984C89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{9E169C6A-7AF6-412A-8251-F0299BAC9A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E169C6A-7AF6-412A-8251-F0299BAC9A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E169C6A-7AF6-412A-8251-F0299BAC9A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FEB2478-7700-40DD-9E21-FF3C4D984C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FEB2478-7700-40DD-9E21-FF3C4D984C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FEB2478-7700-40DD-9E21-FF3C4D984C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FEB2478-7700-40DD-9E21-FF3C4D984C89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,19 +18,22 @@ namespace Shadowrun{
         private ObservableCollection<Specialization> _Specializations;
         private bool _CanDefault;
 
-        [XmlAttribute]
+        [XmlElement]
         public string Name { get { return _Name; } set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); } }
-        public string Group { get { return _Group; } set { _Group = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Group")); } }
-        public string Description { get { return _Description; } set { _Description = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Description")); } }
+		[XmlElement]
+		public string Group { get { return _Group; } set { _Group = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Group")); } }
+		[XmlElement]
+		public string Description { get { return _Description; } set { _Description = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Description")); } }
 
         [XmlAttribute]
         public Attribute LinkedTo { get { return _LinkedTo; } set { _LinkedTo = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Attribute")); } }
         [XmlAttribute]
         public SkillType Type { get { return _Type; } set { _Type = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Type")); } }
-        [XmlArrayItem(ElementName = "Spec")]
-        public ObservableCollection<Specialization> Specializations { get { return _Specializations; } set { _Specializations = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Specializations")); } }
         [XmlAttribute]
         public bool CanDefault { get { return _CanDefault; } set { _CanDefault = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CanDefault")); } }
+
+        [XmlArrayItem]
+        public ObservableCollection<Specialization> Specializations { get { return _Specializations; } set { _Specializations = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Specializations")); } }
 
         public Skill() {
             Name = "";
@@ -117,13 +120,13 @@ namespace Shadowrun{
 		private string _Name;
         private Skill _Skill;
 
-        [XmlText]
+        [XmlElement]
         public string Name {
             get { return _Name; }
             set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); }
         }
 
-        [XmlAttribute]
+        [XmlElement]
         public Skill Skill {
             get { return _Skill; }
             set { _Skill = value;PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Skill")); }

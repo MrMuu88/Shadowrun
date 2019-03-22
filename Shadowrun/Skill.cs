@@ -2,9 +2,11 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 
 namespace Shadowrun{
+	
+	//TODO Implement a skill group class wich has a navigation collection to te skills included
+
     public class Skill : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
-
 		#region Fields and Properties ###################################################################
 
 		private string _Name;

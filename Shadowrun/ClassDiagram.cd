@@ -10,26 +10,36 @@
       <Property Name="Legality" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Shadowrun.Skill" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Shadowrun.Skill" BaseTypeListCollapsed="true">
     <Position X="9.25" Y="3.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ABAAAEACAAAkAAABAAACIAQAgQAgAAAEAQAAAACABFQ=</HashCode>
+      <HashCode>ABAAAEACAAAkgAABAAACIAQAgAAgAAAEAQAAAACABEA=</HashCode>
       <FileName>Skill.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LinkedTo" />
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Specializations" />
+    </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Shadowrun.Specialization" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11" Y="3.5" Width="1.5" />
+  <Class Name="Shadowrun.Specialization" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="5.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>EAAAAAACAAAAACAAAAAAIAQAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAACAAAAgCAAAAAAIAQAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Skill.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Skill" />
+    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Shadowrun.Weapon">
@@ -41,7 +51,7 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAEAAAAIAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAAgAEAAAAIAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Weapon.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -81,28 +91,28 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.Attribute" Collapsed="true">
-    <Position X="12" Y="1" Width="1.5" />
+    <Position X="11.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAEAAAAAAAAAABAEABAAAAAABABAAAACACIAABAAQ=</HashCode>
       <FileName>Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.SkillType" Collapsed="true">
-    <Position X="13.75" Y="2.5" Width="1.5" />
+    <Position X="11.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.DamageType" Collapsed="true">
-    <Position X="12" Y="1.75" Width="1.5" />
+    <Position X="5.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAA=</HashCode>
       <FileName>Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.ReloadingMethod" Collapsed="true">
-    <Position X="12" Y="2.5" Width="1.5" />
+    <Position X="5.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAEAAAAAAAAAAAgAAEAAABAAAQAIAAAAAA=</HashCode>
       <FileName>Enums.cs</FileName>

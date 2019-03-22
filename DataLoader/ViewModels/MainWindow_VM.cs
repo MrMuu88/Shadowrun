@@ -17,6 +17,7 @@ namespace Shadowrun.DataLoader.ViewModels {
 		#region fields and Properties #############################################################
 
 		private ObservableCollection<Skill> _Skills;
+
 		public ObservableCollection<Skill> Skills {
 			get { return _Skills; }
 			set {
@@ -25,10 +26,16 @@ namespace Shadowrun.DataLoader.ViewModels {
 			}
 		}
 
+		#region Commands --------------------------------------------
+
+		public ICommand cmdSave{ get; }
 		public ICommand cmdNewSkill{ get; }
 		public ICommand cmdDeleteSkill{ get; }
 		public ICommand cmdNewSpec{ get; }
 		public ICommand cmdDeleteSpec{ get; }
+
+		#endregion
+
 		#endregion
 
 		#region Methods ###########################################################################
@@ -36,12 +43,16 @@ namespace Shadowrun.DataLoader.ViewModels {
 		#region manage Skills ---------------------------------------
 
 		private void CreateNewSkill() {
-			Skills.Add(new Skill());
+			var ns = new Skill(Attribute.Agility,SkillType.Active,true,"new Skill");
+			Skills.Add(ns);
+			App.DB.Skills.Add(ns);
 		}
 
 		private void DeleteSkill(Skill skill) {
 			if (skill == null) { return; }
 			Skills.Remove(skill);
+			App.DB.Skills.Remove(skill);
+			App.DB.Specializations.RemoveRange(skill.Specializations);
 		}
 		
 		#endregion
@@ -50,13 +61,15 @@ namespace Shadowrun.DataLoader.ViewModels {
 		
 		private void CreateNewSpecialization(Skill skill) {
 			if (skill == null) { return; }
-			skill.Specializations.Add(new Specialization());
+			var ns = new Specialization("New Spec");
+			skill.Specializations.Add(ns);
+			App.DB.Specializations.Add(ns);
 		}
 
 		private void DeleteSpecialization(Specialization spec) {
-		//TODO this Needs Multi binding 
 			if (spec == null) { return; }
-
+			spec.Skill.Specializations.Remove(spec);
+			App.DB.Specializations.Remove(spec);
 		}
 
 		#endregion
@@ -65,26 +78,43 @@ namespace Shadowrun.DataLoader.ViewModels {
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 		}
 
+		private void Save2DB() {
+			try {
+				App.DB.Database.OpenConnection();
+				App.DB.SaveChanges();
+			} catch (Exception ex) {
+				MessageBox.Show($"An exception occured when trying to save modifications to DB:\n{ex.Message}", $"ERROR: {ex.GetType().Name}", MessageBoxButton.OK, MessageBoxImage.Error);
+			} finally {
+				App.DB.Database.CloseConnection();
+			}
+		}
 		#endregion
 
 		#region Ctors #############################################################################
 
 		public MainWindow_VM() {
+			#region set Commands ------------------------------------
+
+			cmdSave = new RelayCommand(Save2DB);
 			cmdNewSkill = new RelayCommand(CreateNewSkill);
 			cmdDeleteSkill = new RelayCommand<Skill>(DeleteSkill);
 			cmdNewSpec = new RelayCommand<Skill>(CreateNewSpecialization);
-
-			//TODO This needs Multibinding
 			cmdDeleteSpec = new RelayCommand<Specialization>(DeleteSpecialization);
+			#endregion
+
+			#region Load Data from DB -------------------------------
+
 			try {
 				App.DB.Database.OpenConnection();
 				App.DB.Skills.Load();
+				App.DB.Specializations.Load();
 			} catch (Exception ex) {
 				MessageBox.Show($"An exception occured when Connecting to DB at First load:\n{ex.Message}", $"ERROR: {ex.GetType().Name}", MessageBoxButton.OK, MessageBoxImage.Error);
 			} finally { 
 				App.DB.Database.CloseConnection();
 				Skills = new ObservableCollection<Skill>(App.DB.Skills.Local);
 			}
+			#endregion
 		}
 
 

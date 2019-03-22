@@ -23,80 +23,96 @@
 			</ObjectDataProvider.MethodParameters>
 		</ObjectDataProvider>
 	</Window.Resources>
-	<TabControl>
-		<TabItem Header="Skills">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Menu Background="White">
+			<MenuItem Grid.Row="0" Header="Save"
+				Command="{Binding cmdSave}"/>
+		</Menu>
+		<TabControl Grid.Row="1">
+			<TabItem Header="Skills">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
 
-				<!-- Column 0-->
-				<ListBox x:Name="lstSkills" Grid.RowSpan="6" Margin="5" Width="150" DisplayMemberPath="Name" ItemsSource="{Binding Skills}"/>
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
-					<Button Width="50" Margin="5" Content="New"
+					<!-- Column 0-->
+					<ListBox x:Name="lstSkills" Grid.RowSpan="6" Margin="5" Width="150" DisplayMemberPath="Name" ItemsSource="{Binding Skills}"/>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
+						<Button Width="50" Margin="5" Content="New"
 						Command="{Binding cmdNewSkill}"/>
-					<Button Width="50" Margin="5" Content="Delete"
+						<Button Width="50" Margin="5" Content="Delete"
 						Command="{Binding cmdDeleteSkill}"
 						CommandParameter="{Binding ElementName=lstSkills,Path=SelectedItem}"/>
-				</StackPanel>
+					</StackPanel>
 
-				<!-- Column 1 -->
-				<Label Grid.Column="1" Grid.Row="0" Content="Name:"/>
-				<Label Grid.Column="1" Grid.Row="1" Content="Group:"/>
-				<Label Grid.Column="1" Grid.Row="2" Content="Linked Attribute:"/>
-				<Label Grid.Column="1" Grid.Row="3" Content="Skill Type:"/>
-				<TextBox  Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="0"
+					<!-- Column 1 -->
+					<Label Grid.Column="1" Grid.Row="0" Content="Name:"/>
+					<Label Grid.Column="1" Grid.Row="1" Content="Group:"/>
+					<Label Grid.Column="1" Grid.Row="2" Content="Linked Attribute:"/>
+					<Label Grid.Column="1" Grid.Row="3" Content="Skill Type:"/>
+					<TextBox  Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="0"
 					Text="{Binding ElementName=lstSkills,Path=SelectedItem.Name}"/>
-				<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="1"/>
-				<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="2"
+					<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="1"/>
+					<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="2"
 					ItemsSource="{Binding Source={StaticResource Attributes}}"
 					SelectedItem="{Binding ElementName=lstSkills,Path=SelectedItem.LinkedTo}"/>
-				<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="3"
+					<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="3"
 					ItemsSource="{Binding Source={StaticResource SkillTypes}}"
 					SelectedItem="{Binding ElementName=lstSkills,Path=SelectedItem.Type}"/>
-				<CheckBox  Margin="5"  Grid.Column="1" Grid.Row="4" Content="Can be Defaulted"
+					<CheckBox  Margin="5"  Grid.Column="1" Grid.Row="4" Content="Can be Defaulted"
 					IsChecked="{Binding ElementName=lstSkills, Path=SelectedItem.CanDefault}"/>
-				<TabControl Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
-					<TabItem Header="Description">
-						<Grid>
-							<TextBox Text="{Binding ElementName=lstSkills,Path=SelectedItem.Description}" Margin="5"/>
-						</Grid>
-					</TabItem>
-					<TabItem Header="Specializations">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto"/>
-								<RowDefinition Height="*"/>
-								<RowDefinition Height="Auto"/>
-								<RowDefinition Height="Auto"/>
-							</Grid.RowDefinitions>
-							<ListBox x:Name="lstSpecializations" Margin="5" Grid.RowSpan="2" DisplayMemberPath="Name"
+					<TabControl Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
+						<TabItem Header="Description">
+							<Grid>
+								<TextBox TextWrapping="Wrap" Text="{Binding ElementName=lstSkills,Path=SelectedItem.Description}" Margin="5"/>
+							</Grid>
+						</TabItem>
+						<TabItem Header="Specializations">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"/>
+									<RowDefinition Height="*"/>
+									<RowDefinition Height="Auto"/>
+									<RowDefinition Height="Auto"/>
+								</Grid.RowDefinitions>
+								<ListBox x:Name="lstSpecializations" Margin="5" Grid.RowSpan="2" DisplayMemberPath="Name"
 								ItemsSource="{Binding ElementName=lstSkills,Path=SelectedItem.Specializations}"/>
-							<TextBox Margin="5" Grid.Column="1" Grid.Row="2"
+								<TextBox Margin="5" Grid.Column="1" Grid.Row="2"
 								Text="{Binding ElementName=lstSpecializations,Path=SelectedItem.Name}"/>
-							<StackPanel Orientation="Horizontal" Grid.Row="3">
-								<Button Width="50" Margin="5" Content="New"
+								<StackPanel Orientation="Horizontal" Grid.Row="3">
+									<Button Width="50" Margin="5" Content="New"
 									Command="{Binding cmdNewSpec}"
 									CommandParameter="{Binding ElementName=lstSkills,Path=SelectedItem}"/>
-								<Button Width="50" Margin="5" Content="Delete"
+									<Button Width="50" Margin="5" Content="Delete"
 									Command="{Binding cmdDeleteSpec}"
 									CommandParameter="{Binding ElementName=lstSpecializations,Path=SelectedItem}"/>
-							</StackPanel>
-						</Grid>
-					</TabItem>
-				</TabControl>
-			</Grid>
-		</TabItem>
-	</TabControl>
+								</StackPanel>
+							</Grid>
+						</TabItem>
+					</TabControl>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Spells"></TabItem>
+			<TabItem Header="Gears"></TabItem>
+			<TabItem Header="Armors"></TabItem>
+			<TabItem Header="Weapons"></TabItem>
+			<TabItem Header="Vechiles"></TabItem>
+			<TabItem Header="Drones"></TabItem>
+		</TabControl>
+	</Grid>
 </Window>

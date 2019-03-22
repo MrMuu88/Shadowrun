@@ -128,8 +128,10 @@ namespace Tester {
         }
 
 		private void OnbtnSave2DB_Click(object sender, RoutedEventArgs e) {
-		
+			App.DB.Skills.UpdateRange(Skills);
+			App.DB.SaveChanges();
 		}
+
 	}//clss
 
 	class StringToSpecsConverter:IValueConverter{  

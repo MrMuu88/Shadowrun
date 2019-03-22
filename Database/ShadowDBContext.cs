@@ -4,21 +4,32 @@ namespace Shadowrun.Database {
 	public class ShadowDBContext : DbContext {
 		#region fields and Properties #############################################################
 		private string ConnectionString;
+		private DBType DBType;
 
-		DbSet<Skill> Skills { get; set; }
-		DbSet<Specialization> Specializations { get; set; }
+		public DbSet<Skill> Skills { get; set; }
+		public DbSet<Specialization> Specializations { get; set; }
 
-		DbSet<Meele> MeeleWeapons { get; set; }
-		DbSet<Projectile> ProjectileWeapons{ get; set; }
-		DbSet<FireArm> FireArms{ get; set; }
-		DbSet<Explosive> Explosives { get; set; }
+		public DbSet<Meele> MeeleWeapons { get; set; }
+		public DbSet<Projectile> ProjectileWeapons{ get; set; }
+		public DbSet<FireArm> FireArms{ get; set; }
+		public DbSet<Explosive> Explosives { get; set; }
 
 		#endregion
 
 		#region Methods ###########################################################################
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-			optionsBuilder.UseMySql(ConnectionString);
+			switch (DBType) {
+				case DBType.MariaDB:
+					optionsBuilder.UseMySql(ConnectionString);
+					break;
+				case DBType.SqLite:
+					optionsBuilder.UseSqlite(ConnectionString);
+					break;
+				default:
+					throw new System.Exception("Unkown DBType");
+					break;
+			}
 			base.OnConfiguring(optionsBuilder);	
 		}
 
@@ -26,10 +37,13 @@ namespace Shadowrun.Database {
 
 		#region Ctors #############################################################################
 
-		public ShadowDBContext(string Constr) {
+		public ShadowDBContext(string Constr,DBType dbt = DBType.MariaDB) {
 			ConnectionString = Constr;
+			DBType = dbt;
 			Database.EnsureCreated();
 		}
 		#endregion
 	}
+
+	public enum DBType{MariaDB,SqLite}
 }

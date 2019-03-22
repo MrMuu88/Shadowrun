@@ -1,0 +1,32 @@
+﻿<Window x:Class="Shadowrun.DataLoader.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:VM="clr-namespace:Shadowrun.DataLoader.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="484.8">
+	<Window.DataContext>
+		<VM:MainWindow_VM x:Name="VModel"/>
+	</Window.DataContext>
+	<TabControl>
+		<TabItem Header="Skills">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<ListBox x:Name="lstSkills" Margin="5" Width="150" DisplayMemberPath="Name" ItemsSource="{Binding Skills}"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+					<Button Width="50" Margin="5" Content="New"/>
+					<Button Width="50" Margin="5" Content="Delete"/>
+				</StackPanel>
+			</Grid>
+		</TabItem>
+	</TabControl>
+</Window>

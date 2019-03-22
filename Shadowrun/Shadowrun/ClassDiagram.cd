@@ -16,7 +16,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ABAAAEAAAAAkAAABAAACIAQAgQAgAAAEAQAAAACABFQ=</HashCode>
+      <HashCode>ABAAAEACAAAkAAABAAACIAQAgQAgAAAEAQAAAACABFQ=</HashCode>
       <FileName>Skill.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -27,7 +27,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAACAAAAAAIAQAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAACAAAAACAAAAAAIAQAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Skill.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -74,45 +74,38 @@
     </TypeIdentifier>
   </Class>
   <Enum Name="Shadowrun.Legality" Collapsed="true">
-    <Position X="7.25" Y="6.25" Width="1.5" />
+    <Position X="5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAQAAAA=</HashCode>
       <FileName>Gear.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.Attribute" Collapsed="true">
-    <Position X="5.25" Y="6.25" Width="1.5" />
+    <Position X="12" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAEAAAAAAAAAABAEABAAAAAABABAAAACACIAABAAQ=</HashCode>
-      <FileName>Skill.cs</FileName>
+      <FileName>Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.SkillType" Collapsed="true">
     <Position X="13.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
-      <FileName>Skill.cs</FileName>
+      <FileName>Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.DamageType" Collapsed="true">
     <Position X="12" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAA=</HashCode>
-      <FileName>Weapon.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="Shadowrun.FiringMode" Collapsed="true">
-    <Position X="13.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EABAAAACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
-      <FileName>Weapon.cs</FileName>
+      <FileName>Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Shadowrun.ReloadingMethod" Collapsed="true">
     <Position X="12" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAEAAAAAAAAAAAgAAEAAABAAAQAIAAAAAA=</HashCode>
-      <FileName>Weapon.cs</FileName>
+      <FileName>Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

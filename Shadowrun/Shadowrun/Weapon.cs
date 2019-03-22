@@ -2,6 +2,7 @@
 
 namespace Shadowrun {
 	public abstract class Weapon : Gear {
+		public int ID{ get; set; }
 		public int Accuracy { get; set; }
 		public int Damage { get; set; }
 		public DamageType DamageType { get; set; }
@@ -15,7 +16,7 @@ namespace Shadowrun {
 	public class Projectile : Weapon { }
 
 	public class FireArm : Weapon {
-		public List<FiringMode> FiringModes { get; set; }
+		public ICollection<FiringMode> FiringModes { get; set; }
 		public int RecoilCompensation { get; set; }
 		public int Ammunition { get; set; }
 		public ReloadingMethod ReloadingMethod { get; set; }

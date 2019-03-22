@@ -20,6 +20,8 @@ namespace Shadowrun{
         private ObservableCollection<Specialization> _Specializations;
         private bool _CanDefault;
 
+		public int ID{ get; set; }
+
         [XmlElement]
         public string Name {
 			get { return _Name; }
@@ -160,6 +162,7 @@ namespace Shadowrun{
 		private string _Name;
 		private Skill _Skill;
 
+		public int ID{ get; set; }
 		[XmlElement]
 		public string Name {
 			get { return _Name; }

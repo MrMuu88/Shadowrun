@@ -191,6 +191,11 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\SkillTab_VM.cs" />
+    <Compile Include="ViewModels\SkillWrapperVM.cs" />
+    <Compile Include="Views\SkillsTabView.xaml.cs">
+      <DependentUpon>SkillsTabView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -205,6 +210,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SkillsTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -236,6 +245,7 @@
   <ItemGroup>
     <Folder Include="Converters\" />
     <Folder Include="Messages\" />
+    <Folder Include="ViewModels\Wrappers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database\Shadowrun.DataAccess.csproj">

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Shadowrun.DataAccess {
-	public class ShadowDBDataService : IDataService  {
+	public class DB_SkillDataService : ISkillDataService  {
 		#region fields and Properties #############################################################
 		public IMessenger Messenger { get; set; }
 		public string ConStr { get; set; }
@@ -12,13 +12,9 @@ namespace Shadowrun.DataAccess {
 		#endregion
 
 		#region Methods ###########################################################################
-		/// <summary>
-		/// Only Returns the Skills without the Specializations
-		/// </summary>
-		/// <returns></returns>
 		public IEnumerable<Skill> LoadAllSkills() {
 			using (var DB = new ShadowDBContext(ConStr,DBType)) {
-				return DB.Skills.ToList();
+				return DB.Skills.Include(s=>s.Specializations).ToList();
 			}
 		}
 
@@ -37,7 +33,7 @@ namespace Shadowrun.DataAccess {
 
 		#region Ctors #############################################################################
 
-		public ShadowDBDataService(IMessenger messenger,string constr,DBType dbt=DBType.MariaDB) {
+		public DB_SkillDataService(IMessenger messenger,string constr,DBType dbt=DBType.MariaDB) {
 			Messenger = messenger;
 			ConStr = constr;
 			DBType = dbt;

@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shadowrun", "Shadowrun\Shadowrun.csproj", "{533F4D21-A6D3-40B4-A3E8-A00C4529D5F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shadowrun.Model", "Shadowrun\Shadowrun.Model.csproj", "{533F4D21-A6D3-40B4-A3E8-A00C4529D5F1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{93E4114A-5471-4EC8-ADBD-4E287432F17C}"
 	ProjectSection(SolutionItems) = preProject
 		..\MyResources\Data\Skils.xml = ..\MyResources\Data\Skils.xml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{7FEB2478-7700-40DD-9E21-FF3C4D984C89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shadowrun.DataAccess", "Database\Shadowrun.DataAccess.csproj", "{7FEB2478-7700-40DD-9E21-FF3C4D984C89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLoader", "DataLoader\DataLoader.csproj", "{1A629940-30AD-4965-8115-AFCA4C27872F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadowrun.DataLoader", "DataLoader\Shadowrun.DataLoader.csproj", "{1A629940-30AD-4965-8115-AFCA4C27872F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

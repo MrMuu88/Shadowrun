@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Shadowrun.Database {
+namespace Shadowrun.DataAccess {
 	public class ShadowDBContext : DbContext {
 		#region fields and Properties #############################################################
 		private string ConnectionString;
@@ -28,7 +28,6 @@ namespace Shadowrun.Database {
 					break;
 				default:
 					throw new System.Exception("Unkown DBType");
-					break;
 			}
 			base.OnConfiguring(optionsBuilder);	
 		}
@@ -36,6 +35,11 @@ namespace Shadowrun.Database {
 		#endregion
 
 		#region Ctors #############################################################################
+
+		public ShadowDBContext() {
+			ConnectionString = "";
+			DBType = DBType.MariaDB;
+		}
 
 		public ShadowDBContext(string Constr,DBType dbt = DBType.MariaDB) {
 			ConnectionString = Constr;

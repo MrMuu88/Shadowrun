@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Shadowrun.DataAccess;
 using System.Windows;
 
 namespace Shadowrun.DataLoader {
@@ -11,10 +7,21 @@ namespace Shadowrun.DataLoader {
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application {
-		public static Database.ShadowDBContext DB = new Database.ShadowDBContext("Server = 192.168.1.9; Database=Shadowrun;Uid=BlueFish;Pwd=HoiChummer;");
+		//"Server = 192.168.1.9; Database=Shadowrun;Uid=BlueFish;Pwd=HoiChummer;"
 
-		public App() {
-			
+		public static IMessenger Messenger { get; set; } = new Messenger();
+
+		public App() {}
+
+		protected override void OnStartup(StartupEventArgs e) {
+			base.OnStartup(e);
+
+			//usnig a bootstrapper at this point would be an overkill
+
+			var DataServ = new ShadowDBDataService(Messenger,"Server = 192.168.1.9; Database=Shadowrun;Uid=BlueFish;Pwd=HoiChummer;");
+			var VM = new ViewModels.MainWindow_VM(DataServ,Messenger);
+			var window = new Views.MainWindow() { DataContext = VM};
+			window.Show();
 		}
 	}
 }

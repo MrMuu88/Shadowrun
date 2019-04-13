@@ -7,10 +7,8 @@
 		xmlns:Sys="clr-namespace:System;assembly=mscorlib"
 		xmlns:SR="clr-namespace:Shadowrun;assembly=Shadowrun"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="460.8">
-	<Window.DataContext>
-		<VM:MainWindow_VM x:Name="VModel"/>
-	</Window.DataContext>
+        Title="MainWindow" Height="450" Width="460.8"
+		d:DataContext="{x:Type VM:MainWindow_VM}">
 	<Window.Resources>
 		<ObjectDataProvider x:Key="Attributes" MethodName="GetValues" ObjectType="{x:Type Sys:Enum}">
 			<ObjectDataProvider.MethodParameters>

@@ -14,11 +14,17 @@ namespace Shadowrun.DataLoader.ViewModels {
 		public IMessenger Messenger{ get; set; }
 
 		private ObservableCollection<Skill> _Skills;
-
 		public ObservableCollection<Skill> Skills {
 			get { return _Skills; }
-			set {
-				_Skills = value;
+			set { _Skills = value;
+				 RaisePropertyChanged();
+			}
+		}
+
+		private Skill _SelectedSkill;
+		public Skill SelectedSkill {
+		get => _SelectedSkill;
+			set { _SelectedSkill = value;
 				RaisePropertyChanged();
 			}
 		}
@@ -40,7 +46,7 @@ namespace Shadowrun.DataLoader.ViewModels {
 		#region manage Skills ---------------------------------------
 
 		private void CreateNewSkill() {
-			var ns = new Skill(Attribute.Agility,SkillType.Active,true,"new Skill");
+			var ns = Skill.Default;
 			Skills.Add(ns);
 		}
 
@@ -55,7 +61,7 @@ namespace Shadowrun.DataLoader.ViewModels {
 		
 		private void CreateNewSpecialization(Skill skill) {
 			if (skill == null) { return; }
-			var ns = new Specialization("New Spec");
+			var ns = Specialization.Default;
 			skill.Specializations.Add(ns);
 			
 		}

@@ -12,12 +12,21 @@ namespace Shadowrun.DataAccess {
 		#endregion
 
 		#region Methods ###########################################################################
+		/// <summary>
+		/// Only Returns the Skills without the Specializations
+		/// </summary>
+		/// <returns></returns>
 		public IEnumerable<Skill> LoadAllSkills() {
 			using (var DB = new ShadowDBContext(ConStr,DBType)) {
-				return DB.Skills.Include(s=> s.Specializations).ToList();
+				return DB.Skills.ToList();
 			}
 		}
 
+		/// <summary>
+		/// Loads the Entire Skill object with all related data.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public Skill LoadSkillByID(int id) {
 			using (var DB = new ShadowDBContext(ConStr,DBType)) {
 				return DB.Skills.Include(s => s.Specializations).FirstOrDefault(s => s.ID == id);

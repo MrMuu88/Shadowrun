@@ -17,9 +17,7 @@ namespace Shadowrun {
 
 		#region Ctors #############################################################################
 
-		public FiringMode() {
-			Mode = "";
-		}
+		public FiringMode() {}
 
 		public FiringMode(string mode):this() {
 			Mode = mode;

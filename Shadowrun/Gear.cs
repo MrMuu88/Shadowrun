@@ -1,4 +1,4 @@
-﻿namespace Shadowrun {
+﻿namespace Shadowrun.Model {
 	public abstract class Gear {
 		public string Name { get; set; }
 		public string Description { get; set; }

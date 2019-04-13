@@ -9,7 +9,7 @@ namespace Shadowrun.DataAccess {
 
 		public DbSet<Skill> Skills { get; set; }
 		public DbSet<Specialization> Specializations { get; set; }
-
+		public DbSet<SkillGroup> SkillGroups{ get; set; }
 		#endregion
 
 		#region Methods ###########################################################################

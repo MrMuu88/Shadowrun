@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Shadowrun {
+namespace Shadowrun.Model {
 	public sealed class FiringMode {
 		#region fields and Properties #############################################################
 

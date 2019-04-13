@@ -1,4 +1,4 @@
-﻿namespace Shadowrun {
+﻿namespace Shadowrun.Model {
 	public enum Attribute { Body, Agility, Reaction, Strength, Willpower, Logic, Intuition, Charisma, Essence, Magic, Resonance, Edge }
 	public enum SkillType { Active, Knowledge }
 	public enum DamageType { Physical, Stun }

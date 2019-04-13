@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Shadowrun {
+namespace Shadowrun.Model {
 	public abstract class Weapon : Gear {
 		public int ID{ get; set; }
 		public int Accuracy { get; set; }

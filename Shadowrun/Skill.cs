@@ -1,22 +1,23 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Shadowrun {
+namespace Shadowrun.Model {
 
 	//TODO Implement a skill group class wich has a navigation collection to te skills included
 
 	public class Skill {
 
 		#region Fields and Properties ###################################################################
-
+		[Key]
 		public int ID { get; set; }
 
-
+		[MaxLength(50)]
 		public string Name { get; set; }
 
-		public string Group { get; set; }
+		public SkillGroup Group { get; set; }
 
 		public string Description { get; set; }
-
+		
 		public Attribute LinkedTo { get; set; }
 
 		public SkillType Type { get; set; }
@@ -39,7 +40,7 @@ namespace Shadowrun {
 			Name = "",
 			Type = SkillType.Active,
 			LinkedTo = Attribute.Agility,
-			Group = "None",
+			Group = SkillGroup.Default,
 			Description = "",
 			CanDefault = true,
 			Specializations = new List<Specialization>()
@@ -56,8 +57,9 @@ namespace Shadowrun {
 	public class Specialization{
 
 		#region Fields and Properties ###################################################################
-
+		[Key]
 		public int ID { get; set; }
+		[MaxLength(50)]
 		public string Name { get; set; }
 		public Skill Skill { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Shadowrun.Model;
+using System.Collections.Generic;
 
 namespace Shadowrun.DataAccess {
 	public interface ISkillDataService {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shadowrun.Model;
 
 namespace Shadowrun.DataAccess {
 	public class ShadowDBContext : DbContext {
@@ -8,11 +9,6 @@ namespace Shadowrun.DataAccess {
 
 		public DbSet<Skill> Skills { get; set; }
 		public DbSet<Specialization> Specializations { get; set; }
-
-		public DbSet<Meele> MeeleWeapons { get; set; }
-		public DbSet<Projectile> ProjectileWeapons{ get; set; }
-		public DbSet<FireArm> FireArms{ get; set; }
-		public DbSet<Explosive> Explosives { get; set; }
 
 		#endregion
 
@@ -37,7 +33,7 @@ namespace Shadowrun.DataAccess {
 		#region Ctors #############################################################################
 
 		public ShadowDBContext() {
-			ConnectionString = "";
+			ConnectionString = "Server = 192.168.1.9; Database = Shadowrun; Uid = BlueFish; Pwd = HoiChummer;";
 			DBType = DBType.MariaDB;
 		}
 

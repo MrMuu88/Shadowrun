@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.EntityFrameworkCore;
+using Shadowrun.Model;
 using System.Collections.Generic;
 using System.Linq;
 

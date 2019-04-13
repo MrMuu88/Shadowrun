@@ -1,12 +1,12 @@
-﻿
-using System.ComponentModel;
+﻿using Shadowrun.Model;
+
 namespace Shadowrun.DataLoader.ViewModels {
 	public class SkillWrapperVM : ViewModelBase {
 		#region fields and Properties #############################################################
 		public Skill Skill { get; set; }
 		public string Name { get => Skill.Name; set => Skill.Name = value; }
 
-		public string Group		  { get => Skill.Group; set => Skill.Group = value; }
+		public SkillGroup Group	  { get => Skill.Group; set => Skill.Group = value; }
 		public string Description { get => Skill.Description; set => Skill.Description = value; }
 		public Attribute LinkedTo { get => Skill.LinkedTo; set => Skill.LinkedTo = value; }
 		public SkillType Type	  { get => Skill.Type; set => Skill.Type = value; }
@@ -18,6 +18,10 @@ namespace Shadowrun.DataLoader.ViewModels {
 		#endregion
 
 		#region Ctors #############################################################################
+
+		public SkillWrapperVM() {
+			Skill = Skill.Default;
+		}
 
 		public SkillWrapperVM(Skill s) {
 			Skill = s;

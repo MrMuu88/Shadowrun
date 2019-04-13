@@ -1,6 +1,10 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Shadowrun.DataAccess;
+using Shadowrun.Model;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -19,6 +23,16 @@ namespace Shadowrun.DataLoader.ViewModels {
 			}
 		}
 
+
+		private ObservableCollection<SkillGroup> _Groups;
+		public ObservableCollection<SkillGroup> Groups {
+			get { return _Groups; }
+			set {
+				_Groups = value;
+				RaisePropertyChanged();
+			}
+		}
+
 		private SkillWrapperVM _SelectedSkill;
 		public SkillWrapperVM SelectedSkill {
 			get => _SelectedSkill;
@@ -32,23 +46,39 @@ namespace Shadowrun.DataLoader.ViewModels {
 		public ICommand cmdDeleteSkill { get; }
 		public ICommand cmdNewSpec { get; }
 		public ICommand cmdDeleteSpec { get; }
+		public ICommand cmdSaveChanges { get; }
 		#endregion
 
 		#region Methods ###########################################################################
 
-		#region manage Skills ---------------------------------------
+		public void Load() {
+			Skills = new ObservableCollection<SkillWrapperVM>();
+			foreach (var skill in DataService.LoadAllSkills()) {
+				Skills.Add(new SkillWrapperVM(skill));
+			}
+			Groups = new ObservableCollection<SkillGroup>(DataService.LoadAllSkillGroups());
+		}
 
-		
 
-		#endregion
+		private void NewSkill() {
+			Skills.Add(new SkillWrapperVM(Skill.Default));
+		}
 
-		#region manage Specializations ------------------------------
+		private void DeleteSkill(SkillWrapperVM skill) {
+		}
 
-		
+		private void NewSpec(Skill skill) {
+			
+		}
 
-		
-
-		#endregion
+		private void DeleteSpec(Specialization spec) {
+			
+		}
+				
+		private void SaveChanges() {
+			var Modified = Skills.Where(sw => sw.IsModified == true).Select(sw => sw.Skill).ToList();
+			DataService.SaveSkills(Modified);
+		}
 
 		#endregion
 
@@ -59,11 +89,16 @@ namespace Shadowrun.DataLoader.ViewModels {
 		public SkillTab_VM(ISkillDataService dataService,IMessenger messenger) {
 			DataService = dataService;
 			Messenger = messenger;
-			Skills = new ObservableCollection<SkillWrapperVM>();
-			foreach (var skill in DataService.LoadAllSkills()) {
-				Skills.Add(new SkillWrapperVM(skill));
-			}
+
+			cmdNewSkill = new RelayCommand(NewSkill);
+			cmdDeleteSkill = new RelayCommand<SkillWrapperVM>(DeleteSkill);
+			cmdNewSpec = new RelayCommand<Skill>(NewSpec);
+			cmdDeleteSpec = new RelayCommand<Specialization>(DeleteSpec);
+			cmdSaveChanges = new RelayCommand(SaveChanges);
+
+			Load();
 		}
+
 		#endregion
 	}
 }

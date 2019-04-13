@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Shadowrun.DataLoader.Views"
 			 xmlns:Sys="clr-namespace:System;assembly=mscorlib"
-			 xmlns:SR="clr-namespace:Shadowrun;assembly=Shadowrun.Model"
+			 xmlns:SR="clr-namespace:Shadowrun.Model;assembly=Shadowrun.Model"
 			 xmlns:VM="clr-namespace:Shadowrun.DataLoader.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="500"

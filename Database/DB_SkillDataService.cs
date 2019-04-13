@@ -19,6 +19,12 @@ namespace Shadowrun.DataAccess {
 			}
 		}
 
+		public IEnumerable<SkillGroup> LoadAllSkillGroups() {
+			using (var DB = new ShadowDBContext(ConStr, DBType)) {
+				return DB.SkillGroups.ToList();
+			}
+		}
+
 		/// <summary>
 		/// Loads the Entire Skill object with all related data.
 		/// </summary>
@@ -27,6 +33,20 @@ namespace Shadowrun.DataAccess {
 		public Skill LoadSkillByID(int id) {
 			using (var DB = new ShadowDBContext(ConStr,DBType)) {
 				return DB.Skills.Include(s => s.Specializations).FirstOrDefault(s => s.ID == id);
+			}
+		}
+
+		public void SaveSkill(Skill skill) {
+			using (var DB = new ShadowDBContext(ConStr, DBType)) {
+				DB.Skills.Update(skill);
+				DB.SaveChanges();
+			}
+		}
+
+		public void SaveSkills(IEnumerable<Skill> Skills) {
+			using (var DB = new ShadowDBContext(ConStr, DBType)) {
+				DB.Skills.UpdateRange(Skills);
+				DB.SaveChanges();
 			}
 		}
 

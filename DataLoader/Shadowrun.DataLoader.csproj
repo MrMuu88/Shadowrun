@@ -191,8 +191,13 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Converters\EnumToString.cs" />
+    <Compile Include="Converters\SkillGroupToString.cs" />
     <Compile Include="ViewModels\SkillTab_VM.cs" />
     <Compile Include="ViewModels\SkillWrapperVM.cs" />
+    <Compile Include="Views\SkillDetailView.xaml.cs">
+      <DependentUpon>SkillDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SkillsTabView.xaml.cs">
       <DependentUpon>SkillsTabView.xaml</DependentUpon>
     </Compile>
@@ -210,6 +215,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SkillDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SkillsTabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -243,7 +252,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Converters\" />
     <Folder Include="Messages\" />
     <Folder Include="ViewModels\Wrappers\" />
   </ItemGroup>

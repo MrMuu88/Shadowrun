@@ -35,16 +35,7 @@ namespace Shadowrun.Model {
 		#endregion
 
 		#region Ctors ###################################################################################
-
-		public static readonly Skill Default = new Skill() {
-			Name = "",
-			Type = SkillType.Active,
-			LinkedTo = Attribute.Agility,
-			Group = SkillGroup.Default,
-			Description = "",
-			CanDefault = true,
-			Specializations = new List<Specialization>()
-		};
+			
 
 		public Skill() {
 			
@@ -77,6 +68,10 @@ namespace Shadowrun.Model {
 		#region Ctors####################################################################################
 
 		public Specialization() {}
+
+		public Specialization(string name) {
+			Name = name;
+		}
 
 		#endregion
 	}

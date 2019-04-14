@@ -14,15 +14,50 @@ namespace Shadowrun.DataAccess {
 
 		#region Methods ###########################################################################
 		public IEnumerable<Skill> LoadAllSkills() {
-			using (var DB = new ShadowDBContext(ConStr,DBType)) {
-				return DB.Skills.Include(s=>s.Specializations).ToList();
-			}
+			//using (var DB = new ShadowDBContext(ConStr,DBType)) {
+			//	return DB.Skills.Include(s=>s.Specializations).ToList();
+			//}
+			var sg = new SkillGroup() { ID = 0, Name = "group Zero" };
+
+			var Specs1 = new List<Specialization>();
+			Specs1.Add(new Specialization("Spec1") { ID=0});
+			Specs1.Add(new Specialization("Spec2") { ID=1});
+
+			var Specs2 = new List<Specialization>();
+			Specs2.Add(new Specialization("Spec3") { ID=2});
+			Specs2.Add(new Specialization("Spec4") { ID=3});
+
+			yield return new Skill() {
+				ID = 0,
+				Name = "Test Skill 1",
+				Group = sg,
+				LinkedTo = Attribute.Body,
+				Type = SkillType.Active,
+				CanDefault = true,
+				Description = "the first test skill",
+				Specializations = Specs1
+			};
+
+			yield return new Skill() {
+				ID = 1,
+				Name = "Test Skill 2",
+				Group = sg,
+				LinkedTo = Attribute.Logic,
+				Type = SkillType.Knowledge,
+				CanDefault = false,
+				Description = "the Second test skill",
+				Specializations = Specs2
+			};
 		}
 
 		public IEnumerable<SkillGroup> LoadAllSkillGroups() {
-			using (var DB = new ShadowDBContext(ConStr, DBType)) {
-				return DB.SkillGroups.ToList();
-			}
+			//using (var DB = new ShadowDBContext(ConStr, DBType)) {
+			//	return DB.SkillGroups.ToList();
+			//}
+			yield return new SkillGroup() { ID = 0, Name = "group Zero" };
+			yield return new SkillGroup() { ID = 1, Name = "first group" };
+			yield return new SkillGroup() { ID = 2, Name = "second group" };
+			yield return new SkillGroup() { ID = 3, Name = "third group" };
 		}
 
 		/// <summary>

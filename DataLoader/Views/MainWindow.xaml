@@ -6,6 +6,8 @@
 		xmlns:Views ="clr-namespace:Shadowrun.DataLoader.Views"
 		xmlns:VM="clr-namespace:Shadowrun.DataLoader.ViewModels"
         mc:Ignorable="d"
+		MinHeight="550"
+		MinWidth="600"
         Title="MainWindow" Height="450" Width="460.8"
 		d:DataContext="{x:Type VM:MainWindow_VM}">
 	<Grid>

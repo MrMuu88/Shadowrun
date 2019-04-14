@@ -2,9 +2,8 @@
 using GalaSoft.MvvmLight.Messaging;
 using Shadowrun.DataAccess;
 using Shadowrun.Model;
-using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -33,15 +32,6 @@ namespace Shadowrun.DataLoader.ViewModels {
 			}
 		}
 
-		private SkillWrapperVM _SelectedSkill;
-		public SkillWrapperVM SelectedSkill {
-			get => _SelectedSkill;
-			set {
-				_SelectedSkill = value;
-				RaisePropertyChanged();
-			}
-		}
-
 		public ICommand cmdNewSkill { get; }
 		public ICommand cmdDeleteSkill { get; }
 		public ICommand cmdNewSpec { get; }
@@ -56,12 +46,22 @@ namespace Shadowrun.DataLoader.ViewModels {
 			foreach (var skill in DataService.LoadAllSkills()) {
 				Skills.Add(new SkillWrapperVM(skill));
 			}
-			Groups = new ObservableCollection<SkillGroup>(DataService.LoadAllSkillGroups());
+			//as the underling pfield is static, this will be set on all Skill wrappers
+			SkillWrapperVM.Groups = new ObservableCollection<SkillGroup>(DataService.LoadAllSkillGroups());
 		}
 
 
 		private void NewSkill() {
-			Skills.Add(new SkillWrapperVM(Skill.Default));
+			var ns = new Skill() {
+				Name = "new Skill",
+				Type = SkillType.Active,
+				LinkedTo = Model.Attribute.Agility,
+				Group = null,
+				Description = "created with Default values",
+				CanDefault = true,
+				Specializations = new List<Specialization>()
+			};
+			Skills.Add(new SkillWrapperVM(ns));
 		}
 
 		private void DeleteSkill(SkillWrapperVM skill) {

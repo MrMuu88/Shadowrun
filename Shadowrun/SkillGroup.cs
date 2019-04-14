@@ -12,9 +12,7 @@ namespace Shadowrun.Model {
 		//Navigation Property
 		public ICollection<Skill> Skills {get;set;}
 
-		public static readonly SkillGroup Default = new SkillGroup() {
-			Name="Default group"
-		};
+		
 		#endregion
 
 		#region Methods ###########################################################################
@@ -25,6 +23,10 @@ namespace Shadowrun.Model {
 
 		public SkillGroup() {
 			Skills = new List<Skill>();
+		}
+
+		public SkillGroup(string groupname) {
+			Name = groupname;
 		}
 		#endregion
 	}

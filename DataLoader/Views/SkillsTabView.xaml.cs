@@ -10,6 +10,5 @@ namespace Shadowrun.DataLoader.Views {
 			InitializeComponent();
 		}
 
-		
 	}
 }

@@ -3,43 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Shadowrun.DataLoader.Views"
-			 xmlns:Sys="clr-namespace:System;assembly=mscorlib"
-			 xmlns:SR="clr-namespace:Shadowrun.Model;assembly=Shadowrun.Model"
+             xmlns:Views="clr-namespace:Shadowrun.DataLoader.Views"
 			 xmlns:VM="clr-namespace:Shadowrun.DataLoader.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="500"
-			 d:DataContext="{x:Type VM:SkillTab_VM}">
-	<UserControl.Resources>
-		<ObjectDataProvider x:Key="Attributes" MethodName="GetValues" ObjectType="{x:Type Sys:Enum}">
-			<ObjectDataProvider.MethodParameters>
-				<x:Type TypeName="SR:Attribute"/>
-			</ObjectDataProvider.MethodParameters>
-		</ObjectDataProvider>
-		<ObjectDataProvider x:Key="SkillTypes" MethodName="GetValues" ObjectType="{x:Type Sys:Enum}">
-			<ObjectDataProvider.MethodParameters>
-				<x:Type TypeName="SR:SkillType"/>
-			</ObjectDataProvider.MethodParameters>
-		</ObjectDataProvider>
-	</UserControl.Resources>
+			 d:DataContext="{x:Type VM:SkillTab_VM}"
+			 >
+	
 	<Grid Background="White">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<!-- Column 0-->
-		<ListBox x:Name="lstSkills" DisplayMemberPath="Name" Grid.RowSpan="6" Margin="5" Width="150" ItemsSource="{Binding Skills}"/>
+		<ListBox x:Name="lstSkills" Margin="5" Width="150"
+				 DisplayMemberPath="DisplayName"
+				 ItemsSource="{Binding Skills}"
+				 SelectedItem="{Binding SelectedSkill}">
+		</ListBox>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
 			<Button Width="50" Margin="5" Content="New"
 						Command="{Binding cmdNewSkill}"/>
@@ -47,51 +33,13 @@
 						Command="{Binding cmdDeleteSkill}"
 						CommandParameter="{Binding ElementName=lstSkills,Path=SelectedItem}"/>
 		</StackPanel>
+		<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
+		<Button  Width="50" Margin="5" Content="Save" Command="{Binding cmdSaveChanges}"/>
+		<Button  Width="50" Margin="5" Content="Cancel" Command="{Binding cmdCancel}"/>		
+		</StackPanel>
+		<Views:SkillDetailView Grid.Column="1"
+			DataContext="{Binding ElementName=lstSkills,Path=SelectedItem}"/>
 
-		<!-- Column 1 -->
-		<Label Grid.Column="1" Grid.Row="0" Content="Name:"/>
-		<Label Grid.Column="1" Grid.Row="1" Content="Group:"/>
-		<Label Grid.Column="1" Grid.Row="2" Content="Linked Attribute:"/>
-		<Label Grid.Column="1" Grid.Row="3" Content="Skill Type:"/>
-		<TextBox  Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="0"
-					Text="{Binding ElementName=lstSkills,Path=SelectedItem.Name,Mode=OneWay}"/>
-		<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="1"/>
-		<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="2"
-					ItemsSource="{Binding Source={StaticResource Attributes}}"
-					SelectedItem="{Binding ElementName=lstSkills,Path=SelectedItem.LinkedTo}"/>
-		<ComboBox Width="100" HorizontalAlignment="Left" Margin="5" Grid.Column="2" Grid.Row="3"
-					ItemsSource="{Binding Source={StaticResource SkillTypes}}"
-					SelectedItem="{Binding ElementName=lstSkills,Path=SelectedItem.Type}"/>
-		<CheckBox  Margin="5"  Grid.Column="1" Grid.Row="4" Content="Can be Defaulted"
-					IsChecked="{Binding ElementName=lstSkills, Path=SelectedItem.CanDefault}"/>
-		<TabControl Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
-			<TabItem Header="Description">
-				<Grid>
-					<TextBox TextWrapping="Wrap" Text="{Binding ElementName=lstSkills,Path=SelectedItem.Description}" Margin="5"/>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Specializations">
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="*"/>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-					</Grid.RowDefinitions>
-					<ListBox x:Name="lstSpecializations" Margin="5" Grid.RowSpan="2" DisplayMemberPath="Name"
-								ItemsSource="{Binding ElementName=lstSkills,Path=SelectedItem.Specializations}"/>
-					<TextBox Margin="5" Grid.Column="1" Grid.Row="2"
-								Text="{Binding ElementName=lstSpecializations,Path=SelectedItem.Name}"/>
-					<StackPanel Orientation="Horizontal" Grid.Row="3">
-						<Button Width="50" Margin="5" Content="New"
-									Command="{Binding cmdNewSpec}"
-									CommandParameter="{Binding ElementName=lstSkills,Path=SelectedItem}"/>
-						<Button Width="50" Margin="5" Content="Delete"
-									Command="{Binding cmdDeleteSpec}"
-									CommandParameter="{Binding ElementName=lstSpecializations,Path=SelectedItem}"/>
-					</StackPanel>
-				</Grid>
-			</TabItem>
-		</TabControl>
+		
 	</Grid>
 </UserControl>

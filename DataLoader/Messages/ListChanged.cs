@@ -1,6 +1,6 @@
 ﻿namespace Shadowrun.DataLoader.Messages {
 
-    public class SkillsChanged {
+    public class ListChanged<T> {
         #region Fields,Properties,Events ##############################################################
 
 
@@ -15,7 +15,7 @@
 
         #region Ctors #################################################################################
 
-        public SkillsChanged() { }
+        public ListChanged() {}
 
         #endregion
     }//clss

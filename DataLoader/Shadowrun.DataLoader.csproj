@@ -193,7 +193,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\EnumToString.cs" />
     <Compile Include="Converters\SkillGroupToString.cs" />
-    <Compile Include="Messages\SkillsChanged.cs" />
+    <Compile Include="Messages\ListChanged.cs" />
     <Compile Include="Messages\SkillSelected.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
     <Compile Include="ViewModels\SkillTab_VM.cs" />

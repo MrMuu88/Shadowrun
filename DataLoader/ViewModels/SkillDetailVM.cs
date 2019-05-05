@@ -163,8 +163,9 @@ namespace Shadowrun.DataLoader.ViewModels {
 
         private void OnSkillSelected(SkillSelected e) {
 
+            //TODO Load SkillGroups from Database
             //SkillGroups = new ObservableCollection<SkillGroup>(DataService.LoadSkillGroups());
-
+            
             if (IsModified) {
                 var result = MessageBox.Show("Unsaved Changes", "save?", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (result == MessageBoxResult.Yes) {
@@ -193,7 +194,7 @@ namespace Shadowrun.DataLoader.ViewModels {
         }
         private void DeleteSkill() {
             DataService.Delete(_Skill);
-            Messenger.Send(new SkillsChanged());
+            Messenger.Send(new ListChanged<Skill>());
             Skill = null;
             IsModified = false;
         }
@@ -207,7 +208,7 @@ namespace Shadowrun.DataLoader.ViewModels {
             _Skill.Description = Description;
             _Skill.Specializations = Specializations;
             DataService.Save(_Skill);
-            Messenger.Send(new SkillsChanged());
+            Messenger.Send(new ListChanged<Skill>());
             IsModified = false;
         }
 

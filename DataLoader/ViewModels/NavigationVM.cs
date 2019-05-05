@@ -2,17 +2,16 @@
 using GalaSoft.MvvmLight.Messaging;
 using Shadowrun.DataAccess;
 using Shadowrun.DataLoader.Messages;
-using Shadowrun.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Shadowrun.DataLoader.ViewModels {
 
-    public class NavigationVM : ViewModelBase {
+    public class NavigationVM<T> : ViewModelBase {
         #region Fields,Properties,Events ##############################################################
 
         public IMessenger Messenger { get; set; }
-        public IDataService<Skill> DataService { get; set; }
+        public IDataService<T> DataService { get; set; }
 
         private ObservableCollection<LookupItem> items = new ObservableCollection<LookupItem>();
 
@@ -44,7 +43,7 @@ namespace Shadowrun.DataLoader.ViewModels {
             Items.Add(new LookupItem(-1, "new Item*"));
         }
 
-        private void OnSKillsChanged(SkillsChanged obj) {
+        private void OnChanged(ListChanged<T> obj) {
             Load();
         }
         #endregion
@@ -56,10 +55,10 @@ namespace Shadowrun.DataLoader.ViewModels {
         }
 
 
-        public NavigationVM(IMessenger messenger,IDataService<Skill> dataService):this(){
+        public NavigationVM(IMessenger messenger,IDataService<T> dataService):this(){
             Messenger = messenger;
             DataService = dataService;
-            Messenger.Register<SkillsChanged>(this, OnSKillsChanged);
+            Messenger.Register<ListChanged<T>>(this, OnChanged);
         }
 
 

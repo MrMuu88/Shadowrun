@@ -24,7 +24,7 @@ namespace Shadowrun.Model {
 
 		public bool CanDefault { get; set; }
 
-		public ICollection<Specialization> Specializations { get; set; }
+        public ICollection<Specialization> Specializations { get; set; } = new List<Specialization>();
 		
 		
 		#endregion

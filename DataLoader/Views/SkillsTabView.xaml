@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Views="clr-namespace:Shadowrun.DataLoader.Views"
+             xmlns:ie="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:VM="clr-namespace:Shadowrun.DataLoader.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="500"
@@ -12,33 +13,15 @@
 	
 	<Grid Background="White">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="150"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
 
 		<!-- Column 0-->
-		<ListBox x:Name="lstSkills" Margin="5" Width="150"
-				 DisplayMemberPath="DisplayName"
-				 ItemsSource="{Binding Skills}"
-				 SelectedItem="{Binding SelectedSkill}">
-		</ListBox>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
-			<Button Width="50" Margin="5" Content="New"
-						Command="{Binding cmdNewSkill}"/>
-			<Button Width="50" Margin="5" Content="Delete"
-						Command="{Binding cmdDeleteSkill}"
-						CommandParameter="{Binding ElementName=lstSkills,Path=SelectedItem}"/>
-		</StackPanel>
-		<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
-		<Button  Width="50" Margin="5" Content="Save" Command="{Binding cmdSaveChanges}"/>
-		<Button  Width="50" Margin="5" Content="Cancel" Command="{Binding cmdCancel}"/>		
-		</StackPanel>
+        <Views:ListNavigationControl DataContext="{Binding NavVM}"/>
+       
 		<Views:SkillDetailView Grid.Column="1"
-			DataContext="{Binding ElementName=lstSkills,Path=SelectedItem}"/>
+			DataContext="{Binding SkillVM}" Margin="5"/>
 
 		
 	</Grid>

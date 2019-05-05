@@ -9,91 +9,100 @@
              mc:Ignorable="d" 
 			 MinHeight="400"
 			 MinWidth="400"
+             x:Name="Control"
              d:DesignHeight="450" d:DesignWidth="400"
-			 d:DataContext="{x:Type VM:SkillWrapperVM}" >
-	<UserControl.Resources>
-		<Conv:EnumToString x:Key="Enum2str"/>
-		<Conv:SkillGroupToString x:Key="SkillGroup2string"/>
-	</UserControl.Resources>
-	<Grid Background="White">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
+			 d:DataContext="{d:DesignInstance {x:Type VM:SkillDetailVM},IsDesignTimeCreatable=True}" >
+    <UserControl.Resources>
+        <Conv:EnumToString x:Key="Enum2str"/>
+        <Conv:SkillGroupToString x:Key="SkillGroup2string"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-		<Label Grid.Row="0" Content="Name:"/>
-		<Label Grid.Row="1" Content="Group:"/>
-		<Label Grid.Row="2" Content="Linked Attribute:"/>
-		<Label Grid.Row="3" Content="Skill Type:"/>
+        <Label Grid.Row="0" Content="Name:"/>
+        <Label Grid.Row="1" Content="Group:"/>
+        <Label Grid.Row="2" Content="Linked Attribute:"/>
+        <Label Grid.Row="3" Content="Skill Type:"/>
 
-		<TextBox Grid.Column="1" Grid.Row="0" Width="150" 
+        <TextBox Grid.Column="1" Grid.Row="0" Width="150" 
 				 HorizontalAlignment="Left" Margin="5"
 				 Text="{Binding Name}"/>
-		<ComboBox Grid.Column="1" Grid.Row="1" Width="150"
+        <ComboBox Grid.Column="1" Grid.Row="1" Width="150"
 				  HorizontalAlignment="Left" Margin="5" 
 				  DisplayMemberPath="Name"
 				  IsEditable="True"
 				  ItemsSource="{Binding SkillGroups}"
 				  Text="{Binding Group, Converter={StaticResource SkillGroup2string}, UpdateSourceTrigger=LostFocus}"
 				  />
-		<ComboBox Grid.Column="1" Grid.Row="2" Width="150"
+        <ComboBox Grid.Column="1" Grid.Row="2" Width="150"
 			      HorizontalAlignment="Left" Margin="5" 
 				  ItemsSource="{Binding Attributes}"
 				  SelectedItem="{Binding LinkedTo,Converter={StaticResource Enum2str}}"
 				  />
-		<ComboBox Grid.Column="1" Grid.Row="3" Width="150" 
+        <ComboBox Grid.Column="1" Grid.Row="3" Width="150" 
 				  HorizontalAlignment="Left" Margin="5" 
 				  ItemsSource="{Binding SkillTypes}"
 				  SelectedItem="{Binding Type,Converter={StaticResource Enum2str}}"
 				  />
-		<CheckBox Margin="5"  Grid.Column="1" Grid.Row="4" Content="Can be Defaulted"
+        <CheckBox Margin="5"  Grid.Column="1" Grid.Row="4" Content="Can be Defaulted"
 				  IsChecked="{Binding CanDefault}"/>
-		<GroupBox Header="Specializations" Grid.Column="2" Grid.RowSpan="5" >
-			<ListBox x:Name="lstSpecializations" HorizontalContentAlignment="Stretch">
-				<ListBox.Resources>
-					<CollectionViewSource Source="{Binding Specializations}" x:Key="Specs"/>
-				</ListBox.Resources>
-				<ListBox.ItemsSource>
-					<CompositeCollection >
-						<CollectionContainer Collection="{Binding Source={StaticResource Specs}}"/>
-						<ListBoxItem>
-							<ListBoxItem.Content>
-								<TextBlock Text="Add new..." Foreground="Gray"/>
-							</ListBoxItem.Content>
-							<ie:Interaction.Triggers>
-								<ie:EventTrigger EventName="MouseDoubleClick">
-									<ie:InvokeCommandAction Command="{Binding cmdAddSpec}"/>
-								</ie:EventTrigger>
-							</ie:Interaction.Triggers>
-						</ListBoxItem>
-					</CompositeCollection>
-				</ListBox.ItemsSource>
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="20"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock Text="{Binding Name}"/>
-							<Button Grid.Column="1" Command="{Binding cmdRemoveSpec}"
+        <GroupBox Header="Specializations" Grid.Column="2" Grid.RowSpan="5" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtSpec" HorizontalAlignment="Stretch" Margin="0,0,2.5,2.5"/>
+                <Button Content="Add" Grid.Column="1" Margin="2.5,0,0,2.5"
+                        Command="{Binding cmdAddSpec}"
+                        CommandParameter="{Binding ElementName=txtSpec,Path=Text}"/>
+                <ListBox x:Name="lstSpecializations"
+                         HorizontalContentAlignment="Stretch"
+                         Grid.Row="1" Grid.ColumnSpan="2" Margin="0,2.5,0,0"
+                         ItemsSource="{Binding Specializations}"
+                         >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{Binding Name}"/>
+                                <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl},Path=DataContext.cmdRemoveSpec}"
 							CommandParameter="{Binding}"/>
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
-		</GroupBox>
-		<GroupBox Header="Description" Grid.ColumnSpan="3" Grid.Row="5">
-			<TextBox  TextWrapping="Wrap" Text="{Binding Description}"/>
-		</GroupBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Description" Grid.ColumnSpan="3" Grid.Row="5">
+            <TextBox  TextWrapping="Wrap" Text="{Binding Description}"/>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="6" Grid.ColumnSpan="3">
+            <Button Width="50" Content="Save" Margin="5"
+                    Command="{Binding cmdSave}"/>
+            <Button Width="50" Content="Delete" Margin="5"
+                    Command="{Binding cmdDelete}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

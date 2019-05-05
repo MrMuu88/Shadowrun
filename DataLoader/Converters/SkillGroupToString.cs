@@ -16,12 +16,12 @@ namespace Shadowrun.DataLoader.Converters {
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
 			var groupname = (string)value;
 
-			var exists = SkillWrapperVM.Groups.Any(sg => sg.Name.ToUpper() == groupname.ToUpper());
+			var exists = SkillDetailVM._SkillGroups.Any(sg => sg.Name.ToUpper() == groupname.ToUpper());
 			if (exists) {
-				return SkillWrapperVM.Groups.FirstOrDefault(sg => sg.Name.ToUpper() == groupname.ToUpper());
+				return SkillDetailVM._SkillGroups.FirstOrDefault(sg => sg.Name.ToUpper() == groupname.ToUpper());
 			} else { 
 				var nsg = new SkillGroup((string)value);
-				SkillWrapperVM.Groups.Add(nsg);
+				SkillDetailVM._SkillGroups.Add(nsg);
 				return nsg;
 			}
 		}

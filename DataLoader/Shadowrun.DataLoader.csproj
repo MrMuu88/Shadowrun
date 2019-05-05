@@ -193,14 +193,24 @@
     </ApplicationDefinition>
     <Compile Include="Converters\EnumToString.cs" />
     <Compile Include="Converters\SkillGroupToString.cs" />
+    <Compile Include="Messages\SkillsChanged.cs" />
+    <Compile Include="Messages\SkillSelected.cs" />
+    <Compile Include="ViewModels\NavigationVM.cs" />
     <Compile Include="ViewModels\SkillTab_VM.cs" />
-    <Compile Include="ViewModels\SkillWrapperVM.cs" />
+    <Compile Include="ViewModels\SkillDetailVM.cs" />
+    <Compile Include="Views\ListNavigationControl.xaml.cs">
+      <DependentUpon>ListNavigationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SkillDetailView.xaml.cs">
       <DependentUpon>SkillDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SkillsTabView.xaml.cs">
       <DependentUpon>SkillsTabView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\ListNavigationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -252,7 +262,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Messages\" />
     <Folder Include="ViewModels\Wrappers\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Shadowrun.DataLoader.Views.ListNavigationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:VM ="clr-namespace:Shadowrun.DataLoader.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Shadowrun.DataLoader.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="200"
+             d:DataContext="{d:DesignInstance {x:Type VM:NavigationVM},IsDesignTimeCreatable=True}"
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Content="Add" Margin="5,5,5,2.5"
+                Command="{Binding cmdAdd}"/>
+        <ListBox Grid.Row="1" Margin="5,2.5,5,5"
+                 ItemsSource="{Binding Items}" DisplayMemberPath="DisplayText"
+                 SelectedItem="{Binding SelectedItem}"/>
+    </Grid>
+</UserControl>

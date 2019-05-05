@@ -18,7 +18,7 @@ namespace Shadowrun.DataLoader {
 
 			//usnig a bootstrapper at this point would be an overkill
 
-			var SkillDataServ = new DB_SkillDataService(Messenger,"Server = 192.168.1.9; Database=Shadowrun;Uid=BlueFish;Pwd=HoiChummer;");
+			var SkillDataServ = new DB_SkillDataService("Server = 192.168.1.9; Database=Shadowrun;Uid=BlueFish;Pwd=HoiChummer;");
 			var VM = new ViewModels.MainWindow_VM(SkillDataServ,Messenger);
 			var window = new Views.MainWindow() { DataContext = VM};
 			window.Show();

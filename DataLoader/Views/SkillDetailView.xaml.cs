@@ -16,5 +16,7 @@ namespace Shadowrun.DataLoader.Views {
 		private void TextBox_LostFocus(object sender, RoutedEventArgs e) {
 			Debug.WriteLine($"Testing {DataContext.GetType().Name}");
 		}
-	}
+
+       
+    }
 }

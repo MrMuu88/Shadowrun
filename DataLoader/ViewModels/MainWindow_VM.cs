@@ -1,12 +1,13 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Shadowrun.DataAccess;
+using Shadowrun.Model;
 
 namespace Shadowrun.DataLoader.ViewModels {
 	public class MainWindow_VM : ViewModelBase {
 
 		#region fields and Properties #############################################################
 
-		public ISkillDataService DataService {get;set;}
+		public IDataService<Skill> DataService {get;set;}
 
 		public IMessenger Messenger{ get; set; }
 
@@ -19,7 +20,7 @@ namespace Shadowrun.DataLoader.ViewModels {
 
 		#region Ctors #############################################################################
 
-		public MainWindow_VM(ISkillDataService dataService,IMessenger messenger):this() {
+		public MainWindow_VM(IDataService<Skill> dataService,IMessenger messenger):this() {
 			DataService = dataService;
 			Messenger = messenger;
 

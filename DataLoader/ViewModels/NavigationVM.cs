@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Messaging;
 using Shadowrun.DataAccess;
 using Shadowrun.DataLoader.Messages;
+using Shadowrun.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -11,7 +12,7 @@ namespace Shadowrun.DataLoader.ViewModels {
         #region Fields,Properties,Events ##############################################################
 
         public IMessenger Messenger { get; set; }
-        public ISkillDataService DataService { get; set; }
+        public IDataService<Skill> DataService { get; set; }
 
         private ObservableCollection<LookupItem> items = new ObservableCollection<LookupItem>();
 
@@ -36,7 +37,7 @@ namespace Shadowrun.DataLoader.ViewModels {
         #region Methods, Tasks, commands ##############################################################
 
         public void Load() {
-            Items = new ObservableCollection<LookupItem>(DataService.LookupSkills());
+            Items = new ObservableCollection<LookupItem>(DataService.LookupItems());
         }
 
         private void AddItem() {
@@ -55,7 +56,7 @@ namespace Shadowrun.DataLoader.ViewModels {
         }
 
 
-        public NavigationVM(IMessenger messenger,ISkillDataService dataService):this(){
+        public NavigationVM(IMessenger messenger,IDataService<Skill> dataService):this(){
             Messenger = messenger;
             DataService = dataService;
             Messenger.Register<SkillsChanged>(this, OnSKillsChanged);

@@ -34,7 +34,7 @@ namespace Shadowrun.DataLoader.ViewModels {
                 Messenger.Register<SkillSelected>(this, OnSkillSelected);
             }
         }
-        public ISkillDataService DataService { get; set; }
+        public IDataService<Skill> DataService { get; set; }
 
         private Skill Skill {
             get => _Skill;
@@ -163,7 +163,7 @@ namespace Shadowrun.DataLoader.ViewModels {
 
         private void OnSkillSelected(SkillSelected e) {
 
-            SkillGroups = new ObservableCollection<SkillGroup>(DataService.LoadSkillGroups());
+            //SkillGroups = new ObservableCollection<SkillGroup>(DataService.LoadSkillGroups());
 
             if (IsModified) {
                 var result = MessageBox.Show("Unsaved Changes", "save?", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
@@ -175,7 +175,7 @@ namespace Shadowrun.DataLoader.ViewModels {
                 Skill = new Skill();
                 IsModified = true;
             } else {
-                Skill = DataService.LoadSkillByID(e.SkillID);
+                Skill = DataService.LoadByID(e.SkillID);
                 IsModified = false;
             }
         }
@@ -192,7 +192,7 @@ namespace Shadowrun.DataLoader.ViewModels {
             IsModified = true;
         }
         private void DeleteSkill() {
-            DataService.DeleteSkill(_Skill);
+            DataService.Delete(_Skill);
             Messenger.Send(new SkillsChanged());
             Skill = null;
             IsModified = false;
@@ -206,7 +206,7 @@ namespace Shadowrun.DataLoader.ViewModels {
             _Skill.CanDefault = CanDefault;
             _Skill.Description = Description;
             _Skill.Specializations = Specializations;
-            DataService.SaveSkill(_Skill);
+            DataService.Save(_Skill);
             Messenger.Send(new SkillsChanged());
             IsModified = false;
         }
@@ -223,7 +223,7 @@ namespace Shadowrun.DataLoader.ViewModels {
         }
 
 
-        public SkillDetailVM(IMessenger messenger, ISkillDataService dataService) : this() {
+        public SkillDetailVM(IMessenger messenger, IDataService<Skill> dataService) : this() {
             Messenger = messenger;
             DataService = dataService;
         }

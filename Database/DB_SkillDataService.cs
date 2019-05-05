@@ -1,11 +1,10 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shadowrun.Model;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Shadowrun.DataAccess {
-    public class DB_SkillDataService : ISkillDataService {
+    public class DB_SkillDataService : IDataService<Skill> {
         #region fields and Properties #############################################################
         public string ConStr { get; set; }
         public DBType DBType { get; set; }
@@ -28,7 +27,7 @@ namespace Shadowrun.DataAccess {
         /// </summary>
         /// <param name="id">the ID of the Skill</param>
         /// <returns>a Skill</returns>
-        public Skill LoadSkillByID(int id) {
+        public Skill LoadByID(int id) {
             using (var DB = new ShadowDBContext(ConStr, DBType)) {
                 return DB.Skills.Include(s => s.Specializations)
                                 .Include(s=>s.Group)
@@ -40,7 +39,7 @@ namespace Shadowrun.DataAccess {
         /// Generate LookupItems from all the skills in the database
         /// </summary>
         /// <returns>Collection of LookupItems</returns>
-        public IEnumerable<LookupItem> LookupSkills() {
+        public IEnumerable<LookupItem> LookupItems() {
             using (var DB = new ShadowDBContext(ConStr, DBType)) {
                 return DB.Skills.Select(s => new LookupItem(s.ID, s.Name)).ToArray();
             }
@@ -50,7 +49,7 @@ namespace Shadowrun.DataAccess {
         /// Saves a Skill to the database
         /// </summary>
         /// <param name="skill">the skill to be saved</param>
-        public void SaveSkill(Skill skill) {
+        public void Save(Skill skill) {
             using (var DB = new ShadowDBContext(ConStr, DBType)) {
                 var specs = DB.Specializations
                     .Where(sp => (sp.Skill == skill) && (!skill.Specializations.Contains(sp)));
@@ -60,7 +59,7 @@ namespace Shadowrun.DataAccess {
             }
         }
 
-        public void DeleteSkill(Skill skill) {
+        public void Delete(Skill skill) {
             using (var DB = new ShadowDBContext(ConStr, DBType)) {
                 var specs = DB.Specializations.Where(sp => sp.Skill == skill);
                 DB.Specializations.RemoveRange(specs);

@@ -1,10 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Shadowrun.DataAccess;
+using Shadowrun.Model;
 
 namespace Shadowrun.DataLoader.ViewModels {
     public class SkillTab_VM : ViewModelBase {
         #region fields and Properties #############################################################
-        public ISkillDataService DataService { get; set; }
+        public IDataService<Skill> DataService { get; set; }
         public IMessenger Messenger { get; set; }
 
         public NavigationVM NavVM { get; set; }
@@ -25,7 +26,7 @@ namespace Shadowrun.DataLoader.ViewModels {
 
 		public SkillTab_VM() {}
 
-		public SkillTab_VM(ISkillDataService dataService,IMessenger messenger) {
+		public SkillTab_VM(IDataService<Skill> dataService,IMessenger messenger) {
 			DataService = dataService;
 			Messenger = messenger;
 

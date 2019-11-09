@@ -8,7 +8,7 @@
 			 xmlns:VM="clr-namespace:Shadowrun.DataLoader.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="500"
-			 d:DataContext="{x:Type VM:SkillTab_VM}"
+			 d:DataContext="{x:Type VM:Tab_VM}"
 			 >
 	
 	<Grid Background="White">

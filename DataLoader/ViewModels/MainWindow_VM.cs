@@ -11,7 +11,7 @@ namespace Shadowrun.DataLoader.ViewModels {
 
 		public IMessenger Messenger{ get; set; }
 
-		public SkillTab_VM SkillsVM{ get; set; }
+		public ITabVM SkillsTabVM{ get; set; }
 
 		#endregion
 
@@ -24,16 +24,12 @@ namespace Shadowrun.DataLoader.ViewModels {
 			DataService = dataService;
 			Messenger = messenger;
 
-			SkillsVM = new SkillTab_VM(DataService,Messenger);
+			SkillsTabVM = new Tab_VM<Skill>(DataService,Messenger);
+            SkillsTabVM.NavVM = new NavigationVM<Skill>(DataService, Messenger);
+            SkillsTabVM.DetailVM = new SkillDetailVM(DataService, Messenger);
 
-			#region set Commands ------------------------------------
-
-			
-			#endregion
-
-			#region Load Data ---------------------------------------
-			
-			#endregion
+            SkillsTabVM.Load();		
+            		
 		}
 
 		public MainWindow_VM() {

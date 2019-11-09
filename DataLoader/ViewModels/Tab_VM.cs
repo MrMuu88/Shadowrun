@@ -3,14 +3,14 @@ using Shadowrun.DataAccess;
 using Shadowrun.Model;
 
 namespace Shadowrun.DataLoader.ViewModels {
-    public class SkillTab_VM : ViewModelBase {
+    public class Tab_VM<T> : ViewModelBase,ITabVM {
         #region fields and Properties #############################################################
-        public IDataService<Skill> DataService { get; set; }
+        public IDataService<T> DataService { get; set; }
         public IMessenger Messenger { get; set; }
 
-        public NavigationVM<Skill> NavVM { get; set; }
+        public INavigationVM NavVM { get; set; }
 
-        public SkillDetailVM SkillVM {get;set;}
+        public IDetailVM DetailVM {get;set;}
 
         #endregion
 
@@ -24,16 +24,11 @@ namespace Shadowrun.DataLoader.ViewModels {
 
 		#region Ctors #############################################################################
 
-		public SkillTab_VM() {}
+		public Tab_VM() {}
 
-		public SkillTab_VM(IDataService<Skill> dataService,IMessenger messenger) {
+		public Tab_VM(IDataService<T> dataService,IMessenger messenger) {
 			DataService = dataService;
-			Messenger = messenger;
-
-            NavVM = new NavigationVM<Skill>(Messenger, DataService);
-            SkillVM = new SkillDetailVM(Messenger,DataService);
-
-            Load();
+			Messenger = messenger;            
 		}
             
 

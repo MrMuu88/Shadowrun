@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Shadowrun.DataLoader.ViewModels {
 
-    public class NavigationVM<T> : ViewModelBase {
+    public class NavigationVM<T> : ViewModelBase,INavigationVM {
         #region Fields,Properties,Events ##############################################################
 
         public IMessenger Messenger { get; set; }
@@ -55,7 +55,7 @@ namespace Shadowrun.DataLoader.ViewModels {
         }
 
 
-        public NavigationVM(IMessenger messenger,IDataService<T> dataService):this(){
+        public NavigationVM(IDataService<T> dataService, IMessenger messenger) :this(){
             Messenger = messenger;
             DataService = dataService;
             Messenger.Register<ListChanged<T>>(this, OnChanged);

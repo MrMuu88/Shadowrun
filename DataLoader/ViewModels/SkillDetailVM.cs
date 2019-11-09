@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 
 namespace Shadowrun.DataLoader.ViewModels {
-    public class SkillDetailVM : ViewModelBase {
+    public class SkillDetailVM : ViewModelBase,IDetailVM {
         #region fields and Properties #############################################################
 
         #region fields --------------------------
@@ -224,7 +224,7 @@ namespace Shadowrun.DataLoader.ViewModels {
         }
 
 
-        public SkillDetailVM(IMessenger messenger, IDataService<Skill> dataService) : this() {
+        public SkillDetailVM(IDataService<Skill> dataService, IMessenger messenger) : this() {
             Messenger = messenger;
             DataService = dataService;
         }
